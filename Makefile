@@ -8,9 +8,11 @@ ifeq ($(LOVE_VERSION), 0.9.0)
 else
   OSXZIP = love-0.8.0-macosx-ub.zip
 endif
-  LOVE = bin/love.app/Contents/MacOS/love
+ifeq ($(LOVE_VERSION), 0.9.0)
+  LOVE = /usr/bin/love9
 else
-  LOVE = /usr/bin/love
+  LOVE = /usr/bin/love8
+endif
 endif
 
 ifeq ($(shell which wget),)
@@ -30,8 +32,16 @@ bin/love.app/Contents/MacOS/love:
 	rm -f $(OSXZIP)
 	mv love.app bin
 
-/usr/bin/love:
+/usr/bin/love9:
 	wget https://bitbucket.org/rude/love/downloads/love_0.8.0-0precise1_amd64.deb
 	-sudo dpkg -i love_0.8.0-0precise1_amd64.deb
 	sudo apt-get update -y
 	sudo apt-get install -f -y
+	sudo ln -s /usr/bin/love /usr/bin/love9
+
+/usr/bin/love8:
+	sudo add-apt-repository -y ppa:bartbes/love-stable
+	sudo apt-get update -y
+	sudo apt-get install -y love
+	sudo ln -s /usr/bin/love /usr/bin/love8
+
