@@ -40,18 +40,18 @@ love9.app/Contents/MacOS/love:
 	rm -f love-0.9.0-macosx-x64.zip
 	mv love.app love9.app
 
-/usr/bin/love9:
+/usr/bin/love8:
 	wget https://bitbucket.org/rude/love/downloads/love_0.8.0-0precise1_amd64.deb
 	-sudo dpkg -i love_0.8.0-0precise1_amd64.deb
 	sudo apt-get update -y
 	sudo apt-get install -f -y
-	sudo ln -s /usr/bin/love /usr/bin/love9
+	sudo ln -s /usr/bin/love /usr/bin/love8
 
-/usr/bin/love8:
+/usr/bin/love9:
 	sudo add-apt-repository -y ppa:bartbes/love-stable
 	sudo apt-get update -y
 	sudo apt-get install -y love
-	sudo ln -s /usr/bin/love /usr/bin/love8
+	sudo ln -s /usr/bin/love /usr/bin/love9
 
 clean:
 	rm -rf love8.app
