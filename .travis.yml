@@ -4,7 +4,6 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
 install:
   - sudo apt-get install unzip
-  - sudo make /usr/bin/love
 env:
   - LOVE_VERSION=0.8.0
   - LOVE_VERSION=0.9.0
