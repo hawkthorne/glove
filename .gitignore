@@ -1,2 +1,2 @@
-bin
+*.app
 src/glove.lua
