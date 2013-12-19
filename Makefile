@@ -24,8 +24,12 @@ endif
 
 test: $(LOVE)
 	rm -rf "$($HOME)/Library/Application Support/LOVE/glove"
-	cp glove.lua src/glove.lua
-	$(LOVE) src
+	cp glove.lua test/glove.lua
+	$(LOVE) test
+
+all:
+	LOVE_VERSION=0.8.0 make test
+	LOVE_VERSION=0.9.0 make test
 
 love8.app/Contents/MacOS/love:
 	$(WGET) https://bitbucket.org/rude/love/downloads/love-0.8.0-macosx-ub.zip

@@ -74,20 +74,31 @@ function NamedThread:get(name)
   return channel:pop()
 end
 
+
 function NamedThread:demand(name)
   local channel = love.thread.getChannel(name)
   return channel:demand()
 end
+
+local _threads = {}
 
 -- http://www.love2d.org/wiki/love.thread.newThread 
 local function newThread(name, filedata)
   if love8 then
     return love.thread.newThread(name, filedata)
   end
+
+  if _threads[name] then
+    error("A thread with that name already exists.")
+  end
   
   local thread = {}
   setmetatable(thread, NamedThread)
   thread:init(name, filedata)
+
+  -- Mark this name as taken
+  _threads[name] = true
+
   return thread
 end
 

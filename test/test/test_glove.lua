@@ -28,5 +28,20 @@ function test_getDirectoryItems()
   end
 end
 
+function test_threads_get()
+  local thread = glove.thread.newThread("threads_get", "threads/get.lua")
+  thread:start()
 
+  love.timer.sleep(0.001)
 
+  local result = thread:get("foo")
+
+  assert_equal("bar", result)
+end
+
+function test_threads_wait()
+  local thread = glove.thread.newThread("threads_wait", "threads/get.lua")
+  thread:start()
+  thread:wait()
+  assert_true(true)
+end

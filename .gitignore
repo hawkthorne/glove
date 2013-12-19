@@ -1,2 +1,2 @@
 *.app
-src/glove.lua
+test/glove.lua
