@@ -31,17 +31,22 @@ end
 function test_threads_get()
   local thread = glove.thread.newThread("threads_get", "threads/get.lua")
   thread:start()
-
-  love.timer.sleep(0.001)
-
-  local result = thread:get("foo")
-
-  assert_equal("bar", result)
+  thread:wait()
+  assert_equal("bar", thread:get("foo"))
 end
 
-function test_threads_wait()
-  local thread = glove.thread.newThread("threads_wait", "threads/get.lua")
+function test_threads_demand()
+  local thread = glove.thread.newThread("threads_demand", "threads/get.lua")
   thread:start()
   thread:wait()
-  assert_true(true)
+  assert_equal("bar", thread:demand("foo"))
+end
+
+function test_threads_peek()
+  local thread = glove.thread.newThread("threads_peek", "threads/get.lua")
+  thread:start()
+  thread:set("foo", "bar")
+  assert_equal("bar", thread:peek("foo"))
+  assert_equal("bar", thread:get("foo"))
+  assert_equal(nil, thread:peek("foo"))
 end
