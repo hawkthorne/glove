@@ -34,7 +34,7 @@ The second code snipper will now work in across both LOVE versions.
 
 ## Documentation
 
-See the full [LuaDoc]() for all supported methods.
+See the [documentation](https://github.com/stackmachine/glove/wiki/Supported-Methods-and-Modules) for supported methods.
 
 ## Developing
 
