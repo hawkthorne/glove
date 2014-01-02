@@ -3,12 +3,18 @@
 -- That work on both 0.8.0 and 0.9.0
 --
 -- The local functions are named after 0.8.0
-
 local glove = {}
 
 -- Features
 local love9 = love._version == "0.9.0"
 local love8 = love._version == "0.8.0"
+
+require "love.filesystem"
+require "love.graphics"
+
+if love9 then
+  require "love.window"
+end
 
 glove.filesystem = {}
 glove.window = {}
@@ -124,6 +130,12 @@ glove.thread.getThread = getThread
 --glove.window.getHeight
 --glove.window.getIcon
 --glove.window.getMode
+--
+glove.window.getHeight = love.graphics.getHeight
+glove.window.getWidth = love.graphics.getWidth
+
+glove.graphics.getHeight = love.graphics.getHeight
+glove.graphics.getWidth = love.graphics.getWidth
 
 local function getTitle() 
   if love.window and love.window.getTitle then
