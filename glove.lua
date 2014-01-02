@@ -124,13 +124,11 @@ glove.thread.getThread = getThread
 
 
 --glove.window.getDesktopDimension
---glove.window.getDimensions
 --glove.window.getFullscreen
 --glove.window.getFullscreenModes
---glove.window.getHeight
 --glove.window.getIcon
 --glove.window.getMode
---
+
 glove.window.getHeight = love.graphics.getHeight
 glove.window.getWidth = love.graphics.getWidth
 
@@ -159,8 +157,18 @@ end
 glove.window.setTitle = setTitle
 glove.graphics.setCaption = setTitle
 
+local function getDimensions(title)
+  if love.graphics.getDimensions then
+    return love.graphics.getDimensions()
+  else
+    return love.graphics.getWidth(), love.graphics.getHeight()
+  end
+end
 
---glove.window.getWidth
+glove.window.getDimensions = getDimensions
+glove.graphics.getDimensions = getDimensions
+
+
 --glove.window.hasFocus
 --glove.window.hasMouseFocus
 --glove.window.isCreated
