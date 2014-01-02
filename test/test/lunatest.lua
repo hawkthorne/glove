@@ -782,10 +782,7 @@ function run(hooks, opts)
 
    local failures = failure_or_error_count(results)
 
-   if opts.quit_on_failure then
-      if failures > 0 then os.exit(failures) end
-      if #failed_suites > 0 then os.exit(#failed_suites) end
-   end
+   return failures + #failed_suites
 end
 
 
