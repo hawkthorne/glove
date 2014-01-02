@@ -2,4 +2,42 @@
 
 [![Build Status](https://travis-ci.org/stackmachine/glove.png?branch=master)](https://travis-ci.org/stackmachine/glove)
 
-Wrapper for LOVE 0.8.0 and 0.9.0
+Glove is a LOVE 0.8 and 0.9 compatibility library. It provides utility
+functions for smoothing over the differences between the LOVE versions with the
+goal of writing Lua and LOVE code that is compatible on both versions.
+
+## Migrating to Glove
+
+Glove is a single Lua file, so it's easy to integrate. Once you've download the
+file, migrating involves only a few changes. First, load the module.
+
+```lua
+local glove = require 'glove'
+```
+
+Next, replace calls to backward-incompatible methods by change `love` to
+`glove`. For example, `love.filesystem.mkdir` no longer works in LOVE 0.9. 
+
+Change this code:
+
+```lua
+love.filesystem.mkdir('foo')
+```
+
+to
+
+```lua
+glove.filesystem.mkdir('foo')
+```
+
+The second code snipper will now work in across both LOVE versions.
+
+## Documentation
+
+See the full [LuaDoc]() for all supported methods.
+
+## Developing
+
+Glove is tested against both LOVE 0.8 and 0.9. To run these tests locally:
+
+    make test

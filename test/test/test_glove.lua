@@ -50,3 +50,20 @@ function test_threads_peek()
   assert_equal("bar", thread:get("foo"))
   assert_equal(nil, thread:peek("foo"))
 end
+
+function test_threads_error()
+  local thread = glove.thread.newThread("threads_error", "threads/error.lua")
+  thread:start()
+  thread:wait()
+
+  local err = thread:get("error")
+  assert_true(string.find(err, "attempt to perform arithmetic on global 'c'"))
+end
+
+function test_threads_demand_trip()
+  local thread = glove.thread.newThread("threads_demand_trip", "threads/demand.lua")
+  thread:start()
+  thread:set("foo", "bar")
+  thread:wait()
+  assert_equal("bar", thread:get("foo2"))
+end
