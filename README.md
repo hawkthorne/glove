@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/stackmachine/glove.png?branch=master)](https://travis-ci.org/stackmachine/glove)
 
 Glove is a LOVE 0.8 and 0.9 compatibility library. It provides utility
-functions for smoothing over the differences between the LOVE versions with the
+functions for smoothing over the differences between LOVE versions with the
 goal of writing Lua and LOVE code that is compatible on both versions.
 
 ## Migrating to Glove
