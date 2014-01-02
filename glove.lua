@@ -11,6 +11,8 @@ local love9 = love._version == "0.9.0"
 local love8 = love._version == "0.8.0"
 
 glove.filesystem = {}
+glove.window = {}
+glove.graphics = {}
 glove.thread = {}
 
 -- http://www.love2d.org/wiki/love.filesystem.enumerate
@@ -113,5 +115,46 @@ end
 
 glove.thread.newThread = newThread
 glove.thread.getThread = getThread
+
+
+--glove.window.getDesktopDimension
+--glove.window.getDimensions
+--glove.window.getFullscreen
+--glove.window.getFullscreenModes
+--glove.window.getHeight
+--glove.window.getIcon
+--glove.window.getMode
+
+local function getTitle() 
+  if love.window and love.window.getTitle then
+    return love.window.getTitle()
+  else
+    return love.graphics.getCaption()
+  end
+end
+
+glove.window.getTitle = getTitle
+glove.graphics.getCaption = getTitle
+
+local function setTitle(title)
+  if love.window and love.window.setTitle then
+    return love.window.setTitle(title)
+  else
+    return love.graphics.setCaption(title)
+  end
+end
+
+glove.window.setTitle = setTitle
+glove.graphics.setCaption = setTitle
+
+
+--glove.window.getWidth
+--glove.window.hasFocus
+--glove.window.hasMouseFocus
+--glove.window.isCreated
+--glove.window.isVisible
+--glove.window.setFullscreen
+--glove.window.setIcon
+--glove.window.setMode
 
 return glove
