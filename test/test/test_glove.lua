@@ -46,6 +46,8 @@ function test_threads_peek()
   local thread = glove.thread.newThread("threads_peek", "threads/get.lua")
   thread:start()
   thread:set("foo", "bar")
+  thread:wait()
+
   assert_equal("bar", thread:peek("foo"))
   assert_equal("bar", thread:get("foo"))
   assert_equal(nil, thread:peek("foo"))
