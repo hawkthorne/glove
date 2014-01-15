@@ -6,8 +6,9 @@ install:
   - mkdir -p $TRAVIS_BUILD_DIR/share/love/
   - sudo apt-get install unzip
 env:
-  - LOVE_VERSION=0.8.0
-  - LOVE_VERSION=0.9.0
+  matrix:
+    - LOVE_VERSION=0.8.0
+    - LOVE_VERSION=0.9.0
   global:
     - XDG_DATA_HOME="$TRAVIS_BUILD_DIR/share"
 script: make test
