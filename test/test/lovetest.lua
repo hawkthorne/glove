@@ -36,11 +36,12 @@ function lovetest.run()
   local failures = lunatest.run(nil, opts)
 
   if love._os ~= "Windows" then
-    print(failures)
     if failures > 0 then
+      print("uh oh")
       os.exit(failures)
     else
-      love.event.push("quit")
+      print("all good")
+      love.event.quit()
     end
   end
 end
