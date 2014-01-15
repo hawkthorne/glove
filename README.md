@@ -30,7 +30,7 @@ to
 glove.filesystem.mkdir('foo')
 ```
 
-The second code snipper will now work across both LOVE versions.
+The second code snippet will now work across both LOVE versions.
 
 ## Documentation
 
