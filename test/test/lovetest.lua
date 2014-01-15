@@ -37,11 +37,7 @@ function lovetest.run()
 
   if love._os ~= "Windows" then
     if failures > 0 then
-      print("uh oh")
       os.exit(failures)
-    else
-      print("all good")
-      love.event.quit()
     end
   end
 end
