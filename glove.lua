@@ -10,6 +10,12 @@ local love9 = love._version == "0.9.0"
 local love8 = love._version == "0.8.0"
 
 require "love.filesystem"
+require "love.graphics"
+
+if love9 then
+  require "love.window"
+end
+
 glove.filesystem = {}
 glove.window = {}
 glove.graphics = {}
@@ -123,22 +129,12 @@ glove.thread.getThread = getThread
 --glove.window.getIcon
 --glove.window.getMode
 
-local function requireGraphics()
-  require "love.graphics"
-
-  if love9 then
-    require "love.window"
-  end
-end
-
 local function getHeight()
-  requireGraphics()
   return love.graphics.getHeight()
 end
 
 
 local function getWidth()
-  requireGraphics()
   return love.graphics.getWidth()
 end
 
@@ -149,8 +145,6 @@ glove.graphics.getHeight = getHeight
 glove.graphics.getWidth = getWidth
 
 local function getTitle() 
-  requireGraphics()
-
   if love.window and love.window.getTitle then
     return love.window.getTitle()
   else
@@ -162,8 +156,6 @@ glove.window.getTitle = getTitle
 glove.graphics.getCaption = getTitle
 
 local function setTitle(title)
-  requireGraphics()
-
   if love.window and love.window.setTitle then
     return love.window.setTitle(title)
   else
@@ -175,8 +167,6 @@ glove.window.setTitle = setTitle
 glove.graphics.setCaption = setTitle
 
 local function getDimensions(title)
-  requireGraphics()
-
   if love.graphics.getDimensions then
     return love.graphics.getDimensions()
   else
