@@ -46,6 +46,19 @@ glove.filesystem.mkdir = mkdir
 glove.filesystem.createDirectory = mkdir
 
 
+function glove.filesystem.isFused()
+  if love.filesystem.isFused then
+    return love.filesystem.isFused()
+  else
+    local datadir = love.filesystem.getAppdataDirectory()
+    local savedir = love.filesystem.getSaveDirectory()
+    local fragment = savedir:sub(datadir:len() + 2)
+    local start, stop = fragment:find("LOVE")
+    print(fragment, start, stop)
+    return (start ~= 1 and stop ~= 4)
+  end
+end
+
 -- The NamedThread class provides the Love 0.8.0
 -- thread interface in Love 0.9.0
 local NamedThread = {}

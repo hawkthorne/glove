@@ -28,6 +28,12 @@ function test_getDirectoryItems()
   end
 end
 
+
+function test_isFused()
+  assert_false(glove.filesystem.isFused("foo"))
+end
+
+
 function test_threads_get()
   local thread = glove.thread.newThread("threads_get", "threads/get.lua")
   thread:start()
