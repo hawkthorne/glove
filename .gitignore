@@ -1,2 +1,4 @@
 *.app
 test/glove.lua
+love8/*
+love9/*

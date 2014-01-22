@@ -1,4 +1,4 @@
-.PHONY: test clean
+.PHONY: test clean win
 
 UNAME := $(shell uname)
 
@@ -30,6 +30,21 @@ test: $(LOVE)
 all:
 	-LOVE_VERSION=0.8.0 make test
 	-LOVE_VERSION=0.9.0 make test
+
+
+win: love9/love.exe love8/love.exe
+
+love9/love.exe:
+	$(WGET) https://bitbucket.org/rude/love/downloads/love-0.9.0-win64.zip
+	unzip -q love-0.9.0-win64.zip
+	rm -f love-0.9.0-win64.zip
+	mv love-0.9.0-win64 love9
+
+love8/love.exe:
+	$(WGET) https://bitbucket.org/rude/love/downloads/love-0.8.0-win-x64.zip
+	unzip -q love-0.8.0-win-x64.zip
+	rm -f love-0.8.0-win-x64.zip
+	mv love-0.8.0-win-x64 love8
 
 love8.app/Contents/MacOS/love:
 	$(WGET) https://bitbucket.org/rude/love/downloads/love-0.8.0-macosx-ub.zip

@@ -58,10 +58,7 @@ function glove.filesystem.isFused()
 
     if love._os == "Linux" then
       start, stop = fragment:find("love/")
-    elseif love._os == "Windows" then
-      -- FIXME: Untested
-      start, stop = fragment:find("LOVE\\")
-    elseif love._os == "OS X" then
+    else
       start, stop = fragment:find("LOVE/")
     end
 
