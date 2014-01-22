@@ -53,9 +53,19 @@ function glove.filesystem.isFused()
     local datadir = love.filesystem.getAppdataDirectory()
     local savedir = love.filesystem.getSaveDirectory()
     local fragment = savedir:sub(datadir:len() + 2)
-    local start, stop = fragment:find("LOVE")
-    print(fragment, start, stop)
-    return (start ~= 1 and stop ~= 4)
+
+    local start, stop = nil
+
+    if love._os == "Linux" then
+      start, stop = fragment:find("love/")
+    elseif love._os == "Windows" then
+      -- FIXME: Untested
+      start, stop = fragment:find("LOVE\\")
+    elseif love._os == "OS X" then
+      start, stop = fragment:find("LOVE/")
+    end
+
+    return (start ~= 1 and stop ~= 5)
   end
 end
 
