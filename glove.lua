@@ -1,12 +1,12 @@
 -- Glove is a compatibility layer
 -- So that you can write LOVE modules
--- That work on both 0.8.0 and 0.9.0
+-- That work on both 0.8.0 and 0.9.0 (editor's note: and 0.9.1 should work, too :3)
 --
 -- The local functions are named after 0.8.0
 local glove = {}
 
 -- Features
-local love9 = love._version == "0.9.0"
+local love9 = love._version == "0.9.0" or love._version == "0.9.1" -- >= ?
 local love8 = love._version == "0.8.0"
 
 require "love.filesystem"
@@ -14,12 +14,26 @@ require "love.graphics"
 
 if love9 then
   require "love.window"
+  require "love.system"
 end
 
+glove.system = {}
 glove.filesystem = {}
 glove.window = {}
 glove.graphics = {}
 glove.thread = {}
+
+-- https://love2d.org/wiki/love.system.getOS      (I also recommend using HTTPS protocol instead of HTTP one, even if those are just links)
+function getOS()                                -- P.S. HeartBleed bug has been fixed by now, hasn't it? (:
+  if love8 then
+    return love._os
+  end
+  
+  return love.system.getOS()
+end
+
+glove._os = getOS()
+glove.system.getOS = getOS
 
 -- http://www.love2d.org/wiki/love.filesystem.enumerate
 local function enumerate(dir)
@@ -86,7 +100,7 @@ end
 
 function NamedThread:set(name, value)
   local channel = love.thread.getChannel(name)
-  return channel:push(value) 
+  return channel:push(value)
 end
 
 function NamedThread:peek(name)
@@ -110,7 +124,7 @@ end
 
 local _threads = {}
 
--- http://www.love2d.org/wiki/love.thread.newThread 
+-- http://www.love2d.org/wiki/love.thread.newThread
 local function newThread(name, filedata)
   if love8 then
     return love.thread.newThread(name, filedata)
@@ -164,7 +178,7 @@ glove.window.getWidth = getWidth
 glove.graphics.getHeight = getHeight
 glove.graphics.getWidth = getWidth
 
-local function getTitle() 
+local function getTitle()
   if love.window and love.window.getTitle then
     return love.window.getTitle()
   else
