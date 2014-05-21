@@ -1,12 +1,12 @@
 -- Glove is a compatibility layer
 -- So that you can write LOVE modules
--- That work on both 0.8.0 and 0.9.0 (editor's note: and 0.9.1 should work, too :3)
+-- That work on 0.8.0, 0.9.0, and 0.9.1
 --
 -- The local functions are named after 0.8.0
 local glove = {}
 
 -- Features
-local love9 = love._version == "0.9.0" or love._version == "0.9.1" -- >= ?
+local love9 = love._version == "0.9.0" or love._version == "0.9.1"
 local love8 = love._version == "0.8.0"
 
 require "love.filesystem"
