@@ -23,8 +23,8 @@ glove.window = {}
 glove.graphics = {}
 glove.thread = {}
 
--- https://love2d.org/wiki/love.system.getOS      (I also recommend using HTTPS protocol instead of HTTP one, even if those are just links)
-function getOS()                                -- P.S. HeartBleed bug has been fixed by now, hasn't it? (:
+-- https://love2d.org/wiki/love.system.getOS
+function getOS()
   if love8 then
     return love._os
   end
@@ -34,6 +34,17 @@ end
 
 glove._os = getOS()
 glove.system.getOS = getOS
+
+-- https://love2d.org/wiki/love.graphics.getFont
+function getFont()
+  if love8 then
+    return love.graphics.newFont(love.graphics.getFont())
+  end
+  
+  return love.graphics.getFont()
+end
+
+glove.graphics.getFont = getFont
 
 -- http://www.love2d.org/wiki/love.filesystem.enumerate
 local function enumerate(dir)
