@@ -10,6 +10,15 @@ function test_createDirectory()
   assert_true(love.filesystem.isDirectory("createDirectory"))
 end
 
+function test_os()
+  assert_equal(glove.system.getOS(), glove._os)
+end
+
+function test_get_font()
+  assert_false(glove.graphics.getFont() == nil)
+end
+
+
 function test_enumerate()
   glove.filesystem.createDirectory("foo")
   love.filesystem.write("foo/foo.txt", "FOO")

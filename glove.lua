@@ -6,7 +6,7 @@
 local glove = {}
 
 -- Features
-local love9 = love._version == "0.9.0"
+local love9 = love._version == "0.9.0" or love._version == "0.9.1"
 local love8 = love._version == "0.8.0"
 
 require "love.filesystem"
@@ -14,12 +14,37 @@ require "love.graphics"
 
 if love9 then
   require "love.window"
+  require "love.system"
 end
 
+glove.system = {}
 glove.filesystem = {}
 glove.window = {}
 glove.graphics = {}
 glove.thread = {}
+
+-- https://love2d.org/wiki/love.system.getOS
+function getOS()
+  if love8 then
+    return love._os
+  end
+  
+  return love.system.getOS()
+end
+
+glove._os = getOS()
+glove.system.getOS = getOS
+
+-- https://love2d.org/wiki/love.graphics.getFont
+function getFont()
+  if love8 then
+    return love.graphics.newFont(love.graphics.getFont())
+  end
+  
+  return love.graphics.getFont()
+end
+
+glove.graphics.getFont = getFont
 
 -- http://www.love2d.org/wiki/love.filesystem.enumerate
 local function enumerate(dir)
