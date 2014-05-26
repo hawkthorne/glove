@@ -15,8 +15,8 @@ file, migrating involves only a few changes. First, load the module.
 local glove = require 'glove'
 ```
 
-Next, replace calls to backward-incompatible methods by change `love` to
-`glove`. For example, `love.filesystem.mkdir` no longer works in LOVE 0.9.x 
+Next, replace calls to backward-incompatible methods by changing `love` to
+`glove`. For example, `love.filesystem.mkdir` no longer works in LOVE 0.9.x.
 
 Change this code:
 
@@ -38,6 +38,6 @@ See the [documentation](https://github.com/stackmachine/glove/wiki/Supported-Met
 
 ## Developing
 
-Glove is tested against both LOVE 0.8.0 and 0.9.x To run these tests locally:
+Glove is tested against both LOVE 0.8.0 and 0.9.x. To run these tests locally:
 
     make test
