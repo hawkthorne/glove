@@ -81,6 +81,30 @@ end
 
 glove.graphics.setPoint = setPoint
 
+--http://www.love2d.org/wiki/love.graphics.setDefaultImageFilter
+local function setDefaultImageFilter (min, mag, anisotropy)
+  if love.graphics.setDefaultImageFilter then
+    love.graphics.setDefaultImageFilter(min, mag) --anisotropy is ignored
+  else
+    love.graphics.setDefaultFilter(min,mag,anisotropy)
+  end
+end
+
+glove.graphics.setDefaultImageFilter = setDefaultImageFilter
+glove.graphics.setDefaultFilter = setDefaultImageFilter
+
+--http://www.love2d.org/wiki/love.graphics.getDefaultImageFilter
+local function getDefaultImageFilter ()
+  if love.graphics.getDefaultImageFilter then
+    return love.graphics.getDefaultImageFilter(),1 --anisotropy to default value
+  else
+    return love.graphics.getDefaultFilter()
+  end
+end
+
+glove.graphics.getDefaultImageFilter = getDefaultImageFilter
+glove.graphics.getDefaultFilter = getDefaultImageFilter
+
 --http://www.love2d.org/wiki/love.graphics.drawq
 local function drawq (image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
   if love.graphics.drawq then
@@ -89,7 +113,9 @@ local function drawq (image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
     love.graphics.draw (image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
   end
 end
-
+--love.graphics.draw(image, quad,...) should be added to love 0.8.0
+--It's easy, you just need to check if the second argument is a quad or a number
+--Then do draw if it is a number and drawq if it is a quad
 glove.graphics.drawq = drawq
 
 --http://www.love2d.org/wiki/love.graphics.quad
