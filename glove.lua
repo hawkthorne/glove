@@ -56,6 +56,19 @@ local function newStencil (stencilFunction)
 end
 
 glove.graphics.newStencil = newStencil
+
+--http://www.love2d.org/wiki/love.graphics.setLine
+local function setLine (width, style)
+  if love.graphics.setLine then
+    love.graphics.setLine(width, style)
+  else
+    love.graphics.setLineWidth(width)
+    love.graphics.setLineStyle(style)
+  end
+end
+
+glove.graphics.setLine = setLine
+
 -- http://www.love2d.org/wiki/love.filesystem.enumerate
 local function enumerate(dir)
   if love.filesystem.enumerate then
