@@ -92,6 +92,28 @@ end
 
 glove.graphics.drawq = drawq
 
+--http://www.love2d.org/wiki/love.graphics.quad
+local function quad (mode, x1, y1, x2, y2, x3, y3, x4, y4)
+  if love.graphics.quad then
+    love.graphics.quad(mode, x1, y1, x2, y2, x3, y3, x4, y4)
+  else
+    love.graphics.polygon(mode, x1, y1, x2, y2, x3, y3, x4, y4)
+  end
+end
+
+glove.graphics.quad = quad
+
+--http://www.love2d.org/wiki/love.graphics.triangle
+local function triangle (mode, x1, y1, x2, y2, x3, y3)
+  if love.graphics.triangle then
+    love.graphics.triangle(mode, x1, y1, x2, y2, x3, y3)
+  else
+    love.graphics.polygon(mode, x1, y1, x2, y2, x3, y3)
+  end
+end
+
+glove.graphics.triangle = triangle
+
 -- http://www.love2d.org/wiki/love.filesystem.enumerate
 local function enumerate(dir)
   if love.filesystem.enumerate then
