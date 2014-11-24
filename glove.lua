@@ -46,6 +46,113 @@ end
 
 glove.graphics.getFont = getFont
 
+--http://www.love2d.org/wiki/love.graphics.newStencil
+local function newStencil (stencilFunction)
+  if love.graphics.newStencil then
+    return love.graphics.newStencil(stencilFunction)
+  else
+    return stencilFunction
+  end
+end
+
+glove.graphics.newStencil = newStencil
+
+--http://www.love2d.org/wiki/love.graphics.setLine
+local function setLine (width, style)
+  if love.graphics.setLine then
+    love.graphics.setLine(width, style)
+  else
+    love.graphics.setLineWidth(width)
+    love.graphics.setLineStyle(style)
+  end
+end
+
+glove.graphics.setLine = setLine
+
+--http://www.love2d.org/wiki/love.graphics.setPoint
+local function setPoint (size, style)
+  if love.graphics.setPoint then
+    love.graphics.setPoint(size, style)
+  else
+    love.graphics.setPointSize(size)
+    love.graphics.setPointStyle(style)
+  end
+end
+
+glove.graphics.setPoint = setPoint
+
+--http://www.love2d.org/wiki/love.graphics.setDefaultImageFilter
+local function setDefaultImageFilter (min, mag, anisotropy)
+  if love.graphics.setDefaultImageFilter then
+    love.graphics.setDefaultImageFilter(min, mag) --anisotropy is ignored
+  else
+    love.graphics.setDefaultFilter(min,mag,anisotropy)
+  end
+end
+
+glove.graphics.setDefaultImageFilter = setDefaultImageFilter
+glove.graphics.setDefaultFilter = setDefaultImageFilter
+
+--http://www.love2d.org/wiki/love.graphics.getDefaultImageFilter
+local function getDefaultImageFilter ()
+  if love.graphics.getDefaultImageFilter then
+    return love.graphics.getDefaultImageFilter(),1 --anisotropy to default value
+  else
+    return love.graphics.getDefaultFilter()
+  end
+end
+
+glove.graphics.getDefaultImageFilter = getDefaultImageFilter
+glove.graphics.getDefaultFilter = getDefaultImageFilter
+
+--http://www.love2d.org/wiki/love.graphics.drawq
+local function drawq (image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
+  if love.graphics.drawq then
+    love.graphics.drawq (image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
+  else
+    love.graphics.draw (image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
+  end
+end
+
+glove.graphics.drawq = drawq
+
+--http://www.love2d.org/wiki/love.graphics.draw
+local function draw (image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
+  if love8 then
+    if type(quad) == "number" then
+      love.graphics.draw(image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
+    elseif quad:type() == "Quad" then
+      love.graphics.drawq(image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
+    end
+  else
+    love.graphics.draw(image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
+  end
+end
+
+glove.graphics.draw = draw
+
+--http://www.love2d.org/wiki/love.graphics.quad
+local function quad (mode, x1, y1, x2, y2, x3, y3, x4, y4)
+  if love.graphics.quad then
+    love.graphics.quad(mode, x1, y1, x2, y2, x3, y3, x4, y4)
+  else
+    love.graphics.polygon(mode, x1, y1, x2, y2, x3, y3, x4, y4)
+  end
+end
+
+glove.graphics.quad = quad
+
+--http://www.love2d.org/wiki/love.graphics.triangle
+local function triangle (mode, x1, y1, x2, y2, x3, y3)
+  if love.graphics.triangle then
+    love.graphics.triangle(mode, x1, y1, x2, y2, x3, y3)
+  else
+    love.graphics.polygon(mode, x1, y1, x2, y2, x3, y3)
+  end
+end
+
+glove.graphics.triangle = triangle
+
 -- http://www.love2d.org/wiki/love.filesystem.enumerate
 local function enumerate(dir)
   if love.filesystem.enumerate then
