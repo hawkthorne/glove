@@ -69,6 +69,18 @@ end
 
 glove.graphics.setLine = setLine
 
+--http://www.love2d.org/wiki/love.graphics.setLine
+local function setPoint (size, style)
+  if love.graphics.setPoint then
+    love.graphics.setPoint(size, style)
+  else
+    love.graphics.setPointSize(size)
+    love.graphics.setPointStyle(style)
+  end
+end
+
+glove.graphics.setPoint = setPoint
+
 -- http://www.love2d.org/wiki/love.filesystem.enumerate
 local function enumerate(dir)
   if love.filesystem.enumerate then
