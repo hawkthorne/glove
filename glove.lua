@@ -46,6 +46,16 @@ end
 
 glove.graphics.getFont = getFont
 
+--http://www.love2d.org/wiki/love.graphics.newStencil
+local function newStencil (stencilFunction)
+  if love.graphics.newStencil then
+    return love.graphics.newStencil(stencilFunction)
+  else
+    return stencilFunction
+  end
+end
+
+glove.graphics.newStencil = newStencil
 -- http://www.love2d.org/wiki/love.filesystem.enumerate
 local function enumerate(dir)
   if love.filesystem.enumerate then
