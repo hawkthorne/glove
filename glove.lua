@@ -113,10 +113,23 @@ local function drawq (image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
     love.graphics.draw (image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
   end
 end
---love.graphics.draw(image, quad,...) should be added to love 0.8.0
---It's easy, you just need to check if the second argument is a quad or a number
---Then do draw if it is a number and drawq if it is a quad
+
 glove.graphics.drawq = drawq
+
+--http://www.love2d.org/wiki/love.graphics.draw
+local function draw (image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
+  if love8 then
+    if type(quad) == "number" then
+      love.graphics.draw(image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
+    elseif quad:type() == "Quad" then
+      love.graphics.drawq(image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
+    end
+  else
+    love.graphics.draw(image, quad, x, y, r, sx, sy, ox, oy, kx, ky)
+  end
+end
+
+glove.graphics.draw = draw
 
 --http://www.love2d.org/wiki/love.graphics.quad
 local function quad (mode, x1, y1, x2, y2, x3, y3, x4, y4)
